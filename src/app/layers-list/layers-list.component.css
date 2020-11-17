@@ -1,0 +1,5 @@
+.sidebar-sticky {
+  overflow-y: overlay;
+  height: calc(100vh - 52px);
+}
+

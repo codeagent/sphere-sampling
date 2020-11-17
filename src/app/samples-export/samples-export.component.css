@@ -1,0 +1,21 @@
+:host {
+  min-height: 0vh;
+}
+
+.tab-content {
+  min-height: 0vh;
+}
+
+.tab-pane,
+pre,
+code {
+  height: 100%;
+}
+
+pre {
+  overflow-y: hidden;
+}
+
+code {
+  overflow-y: auto;
+}

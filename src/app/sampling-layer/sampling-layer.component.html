@@ -1,0 +1,138 @@
+<div class="card my-2 shadow-sm" [formGroup]="form" [style.border-color]="layer.color ">
+	<div class="card-body p-1">
+		<div class="form-row">
+			<div class="form-group col-md-6 mb-1">
+				<label [for]="layer.id + '-tier-type'" class="mb-1"
+          ><small>Type</small></label>
+				<select
+          class="custom-select custom-select-sm"
+          [id]="layer.id + '-tier-type'"
+          formControlName="type"
+        >
+          <option *ngFor="let type of typeOptions" [value]="type.value"
+            >{{ type.label }}</option
+          >
+        </select>
+			</div>
+			<div class="form-group col-md-6 mb-1">
+				<ng-container *ngIf="form.get('type').value !== SamplingType.Icosphere">
+					<label [for]="layer.id + '-tier-samples'" class="mb-1"
+            ><small>Samples</small></label>
+					<input
+            formControlName="samples"
+            type="number"
+            min="1"
+            max="512"
+            step="1"
+            class="form-control form-control-sm"
+            [id]="layer.id + '-tier-samples'"
+          />
+        </ng-container>
+
+					<ng-container *ngIf="form.get('type').value === SamplingType.Icosphere">
+						<label [for]="layer.id + '-tier-divisions'" class="mb-1"
+            ><small>Divisions</small></label>
+						<input
+            formControlName="divisions"
+            type="number"
+            min="0"
+            max="6"
+            step="1"
+            class="form-control form-control-sm"
+            [id]="layer.id + '-tier-divisions'"
+          />
+        </ng-container>
+			</div>
+		</div>
+		<div class="form-row">
+			<div class="form-group col-md-6 mb-1">
+				<label [for]="layer.id + '-tier-radius'" class="mb-1"
+          ><small>Radius</small></label>
+				<input
+          formControlName="radius"
+          type="range"
+          min="0.0"
+          max="1.0"
+          step="0.01"
+          class="form-control form-control-sm custom-range border-0"
+          [id]="layer.id + '-tier-radius'"
+        />
+      </div>
+				<div class="form-group col-md-6 mb-1">
+					<label [for]="layer.id + '-tier-angle'" class="mb-1"
+          ><small>Angle</small></label>
+					<input
+          formControlName="angle"
+          type="range"
+          min="0.0"
+          max="3.1416"
+          step="0.1"
+          class="form-control form-control-sm custom-range border-0"
+          [id]="layer.id + '-tier-angle'"
+        />
+      </div>
+				</div>
+			</div>
+			<div class="card-footer text-muted p-1">
+				<div class="form-row">
+					<div class="form-group col-sm-1 mb-0">
+						<div class="custom-control  form-control-sm pl-1">
+							<span class="color" [style.background-color]="layer.color"></span>
+						</div>
+					</div>
+					<div class="form-group col-sm-2 mb-0">
+						<div class="custom-control custom-switch form-control-sm">
+							<input
+            formControlName="displayRays"
+            type="checkbox"
+            class="custom-control-input"
+            [id]="layer.id + '-display-rays'"
+          />
+							<label
+            class="custom-control-label user-select-none"
+            [for]="layer.id + '-display-rays'"
+            >Rays</label>
+						</div>
+					</div>
+					<div class="form-group col-sm-2 mb-0">
+						<div class="custom-control custom-switch form-control-sm">
+							<input
+            formControlName="displayDots"
+            type="checkbox"
+            class="custom-control-input"
+            [id]="layer.id + '-display-dots'"
+          />
+							<label
+            class="custom-control-label user-select-none"
+            [for]="layer.id + '-display-dots'"
+            >Dots</label>
+						</div>
+					</div>
+					<div class="form-group col-sm-3 mb-0">
+						<div class="custom-control custom-switch form-control-sm">
+							<input
+            formControlName="displaySphere"
+            type="checkbox"
+            class="custom-control-input"
+            [id]="layer.id + '-display-sphere'"
+          />
+							<label
+            class="custom-control-label user-select-none"
+            [for]="layer.id + '-display-sphere'"
+            >Sphere</label>
+						</div>
+					</div>
+
+					<div class="form-group col-sm-4 mb-0 text-right">
+						<button
+          type="button"
+          class="btn btn-danger btn-sm"
+          [disabled]="disableRemove"
+          (click)="remove()"
+        >
+          Remove
+        </button>
+					</div>
+				</div>
+			</div>
+		</div>
